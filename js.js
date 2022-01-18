@@ -1,8 +1,6 @@
 let captura="";
 let arrayItens = [];
 let posArray = 0;
-let botaoEditar = `<td><i class="fas fa-edit btnedit"></i></td>`
-let botaoDeletar = `<td><i class="fas fa-trash-alt btndelete"></i></td>`
 let retornoApi = "";
 
 function salvar(){
@@ -18,11 +16,11 @@ function salvar(){
 function deletar(){
     captura = document.getElementById('listid')
     let itemDeletar = posArray
-    return document.getElementById('tabela-item').innerHTML += 'teste'
+    return document.getElementById('areaLista').innerHTML += 'teste'
 }
 
 function apagarLista(){
-    let tabelaId = document.getElementById('tabelaId');
+    let tabelaId = document.getElementById('areaLista');
     decisao = confirm('Deseja realmente limpar a lista de itens ?')
     if (decisao){
         arrayItens.splice(0,arrayItens.length)
@@ -32,10 +30,12 @@ function apagarLista(){
 }
 
 function escreveLista(item){
-    let tabelaId = document.getElementById('tabelaId');
-        tabelaId.innerHTML =""
+    let areaLista = document.getElementById('areaLista');
+    let botaoEditar = `<td><i class="fas fa-edit btnedit"></i></td>`
+    let botaoDeletar = `<td><i class="fas fa-trash-alt btndelete"></i></td>`
+        areaLista.innerHTML =""
         for (let i=0; i < arrayItens.length; i++){
-            let tr = tabelaId.insertRow();
+            let tr = areaLista.insertRow();
 
             let td_id = tr.insertCell();
             td_id.innerText = i
