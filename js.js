@@ -1,19 +1,55 @@
 let captura="";
-arrayItens = "";
+let arrayItens = [];
+let posArray = 0;
+let botaoEditar = `<td><i class="fas fa-edit btnedit"></i></td>`
+let botaoDeletar = `<td><i class="fas fa-trash-alt btndelete"></i></td>`
+let retornoApi = "";
+
 function salvar(){
     captura = document.getElementById('listid').value 
-    arrayItens +=captura
+    arrayItens.push(captura)
     console.log(arrayItens)
-    escreveLista(captura)
+    posArray = arrayItens[arrayItens.length-1]
+   /* escreveLista(arrayItens[arrayItens.length-1])*/
+   escreveLista(captura)
+}
+
+
+function deletar(){
+    captura = document.getElementById('listid')
+    let itemDeletar = posArray
+    return document.getElementById('tabela-item').innerHTML += 'teste'
 }
 
 function escreveLista(item){
+    let tabelaId = document.getElementById('tabelaId');
+        for (let i=0; i < arrayItens.length; i++){
+            let tr = tabelaId.insertRow();
+
+            let td_id = tr.insertCell();
+            td_id.innerText = i
+            let td_foto = tr.insertCell();
+            let td_nome = tr.insertCell();
+            td_nome.innerText = arrayItens[i]
+            let td_editar = tr.insertCell();
+            td_editar.innerHTML = botaoEditar
+            let td_deletar = tr.insertCell();
+            td_deletar.innerHTML = botaoDeletar
+
+        }
+}
+
+
+
+/* Funcao que recebe o item e o insere na listagem de itens  
+function escreveLista(item){
     return document.getElementById('tabela-item').innerHTML += `<tr>
     <th scope="row">1</th>
-    <td><img class="imgtabela" src="https://tse3.mm.bing.net/th?id=OIP.5-hjugBZmquJKnC2H0brpgHaE8&amp"></i></td>>
-    <td class="linha-tabela">${item}</td>
-    <td><i class="fas fa-edit btnedit"></i></td>
-    <td><i class="fas fa-trash-alt btndelete"></i></td>
+    <td><img class="imgtabela" src="testes.length-1"]}</td>
+    <td class="linha-tabela">Pao</td>
+    
+    
     
   </tr>`;
 }
+*/
