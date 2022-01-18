@@ -21,8 +21,19 @@ function deletar(){
     return document.getElementById('tabela-item').innerHTML += 'teste'
 }
 
+function apagarLista(){
+    let tabelaId = document.getElementById('tabelaId');
+    decisao = confirm('Deseja realmente limpar a lista de itens ?')
+    if (decisao){
+        arrayItens.splice(0,arrayItens.length)
+        tabelaId.innerHTML =""
+    }
+    
+}
+
 function escreveLista(item){
     let tabelaId = document.getElementById('tabelaId');
+        tabelaId.innerHTML =""
         for (let i=0; i < arrayItens.length; i++){
             let tr = tabelaId.insertRow();
 
