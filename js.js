@@ -1,25 +1,26 @@
-let captura = "";
 let arrayItens = [];
-let posArray = 0;
-let retornoApi = "";
-let posicao = 0;
-let itemEditado
-let id = null;
-arrayItens.splice(0, arrayItens.length)
+let itemEditado = 0
+let posItemEdit = 0;
+
 
 function salvar() {
+    let posArray = 0;
     captura = document.getElementById('listid').value
-    if (validaEntrada(captura) && itemEditado == null) {
+    /*condicao para verificar se esta salvando item editado 
+    ou criando um novo item  */
+    if (validaEntrada(captura) && itemEditado == 0) {
         arrayItens.push(captura)
         posArray = arrayItens[arrayItens.length - 1]
         escreveLista()
         document.getElementById('listid').value = ""
-    }else {
-        arrayItens.splice(id,1,captura)
+    } else {
+
+        arrayItens.splice(posItemEdit, 1, captura)
         escreveLista()
-        document.getElementById('listid').value = ""
+        console.log(posItemEdit)
+        alert("Alteração Feita com Sucesso ! ")
     }
-    itemEditado = null;
+    itemEditado = 0;
 }
 
 
@@ -31,20 +32,19 @@ function deletar(id) {
         arrayItens.splice(id, 1)
         escreveLista()
     }
-    
+
 
 
 }
 
-function editar(id) {
-    if (id !== undefined) {
+function editar(indice) {
+    if (indice !== undefined) {
         itemEditado = 1;
-        let itemEditar = arrayItens[id];
+        let itemEditar = arrayItens[indice];
         document.getElementById("listid").value = itemEditar
-
     }
-   
-   
+    return posItemEdit = indice
+
 }
 
 function apagarLista() {
@@ -89,15 +89,7 @@ function validaEntrada(entrada) {
     } else return true
 }
 
-/* Funcao que recebe o item e o insere na listagem de itens  
-function escreveLista(item){
-    return document.getElementById('tabela-item').innerHTML += `<tr>
-    <th scope="row">1</th>
-    <td><img class="imgtabela" src="testes.length-1"]}</td>
-    <td class="linha-tabela">Pao</td>
-    
-    
-    
-  </tr>`;
-}
-*/
+
+
+
+
