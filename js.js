@@ -16,9 +16,13 @@ function salvar(){
 
 
 function deletar(){
-    captura = document.getElementById('listid')
-    let itemDeletar = posArray
-    return document.getElementById('areaLista').innerHTML += 'teste'
+   
+
+    
+}
+
+function editar(){
+    
 }
 
 function apagarLista(){
@@ -34,7 +38,7 @@ function apagarLista(){
 function escreveLista(item){
     let areaLista = document.getElementById('areaLista');
     let botaoEditar = `<td><i class="fas fa-edit btnedit"></i></td>`
-    let botaoDeletar = `<td><i class="fas fa-trash-alt btndelete"></i></td>`
+    let botaoDeletar = `<td><i class="fas fa-trash-alt btndelete" onclick=deletar()></i></td>`
         areaLista.innerHTML =""
         for (let i=0; i < arrayItens.length; i++){
             let tr = areaLista.insertRow();
@@ -45,10 +49,13 @@ function escreveLista(item){
             let td_nome = tr.insertCell();
             td_nome.innerText = arrayItens[i]
             let td_editar = tr.insertCell();
+            td_editar.setAttribute("onclick","editar("+i+")")
             td_editar.innerHTML = botaoEditar
             let td_deletar = tr.insertCell();
+            
             td_deletar.innerHTML = botaoDeletar
-
+            td_deletar.setAttribute("onclick","deletar("+i+")")
+            td_id.classList.add('idLista')
         }
 }
 
