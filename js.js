@@ -5,11 +5,13 @@ let retornoApi = "";
 
 function salvar(){
     captura = document.getElementById('listid').value 
+    if(validaEntrada(captura)){
     arrayItens.push(captura)
     console.log(arrayItens)
     posArray = arrayItens[arrayItens.length-1]
-   /* escreveLista(arrayItens[arrayItens.length-1])*/
-   escreveLista(captura)
+    escreveLista(captura)
+    document.getElementById('listid').value =""
+    }
 }
 
 
@@ -50,7 +52,11 @@ function escreveLista(item){
         }
 }
 
-
+function validaEntrada(entrada){
+    if(entrada == typeof Number || entrada == ""){
+       return alert("Informe um Item \n ( Espaço vazio ou numeros nao são aceitos )")
+    }else return true
+}
 
 /* Funcao que recebe o item e o insere na listagem de itens  
 function escreveLista(item){
