@@ -1,7 +1,7 @@
 let arrayItens = [];
-let itemEditado = 0
+let itemEditado = 0 ; 
 let posItemEdit = 0;
-
+let arrayApi = [""];
 
 function salvar() {
     let posArray = 0;
@@ -11,13 +11,13 @@ function salvar() {
     if (validaEntrada(captura) && itemEditado == 0) {
         arrayItens.push(captura)
         posArray = arrayItens[arrayItens.length - 1]
+        console.log(arrayApi[arrayApi.length])
         escreveLista()
         document.getElementById('listid').value = ""
     } else {
 
         arrayItens.splice(posItemEdit, 1, captura)
         escreveLista()
-        console.log(posItemEdit)
         alert("Alteração Feita com Sucesso ! ")
     }
     itemEditado = 0;
@@ -84,12 +84,27 @@ function escreveLista() {
 }
 
 function validaEntrada(entrada) {
-    if (entrada == typeof Number || entrada == "") {
+    if (typeof entrada === Number || entrada == "") {
         return alert("Informe um Item \n ( Espaço vazio ou numeros nao são aceitos )")
     } else return true
 }
 
 
 
+const result = document.querySelector('.result');
+const result2 = document.querySelector('.result2');
 
-
+fetch('https://randomuser.me/api/', {})
+  .then((response) => {
+   
+    console.log(response);
+    
+    return response.json(); 
+  }).then((data) => {
+  	var email =data.results[0].email;
+   var nome=data.results[0].name.first;
+   result.textContent = email;
+    result2.textContent = nome;
+  }).catch((err) => {
+    console.log('錯誤:', err);
+});
