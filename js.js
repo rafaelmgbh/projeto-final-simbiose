@@ -1,72 +1,85 @@
-let captura="";
+let captura = "";
 let arrayItens = [];
 let posArray = 0;
 let retornoApi = "";
 let posicao = 0;
+arrayItens.splice(0, arrayItens.length)
 
-function salvar(){
-    captura = document.getElementById('listid').value 
-    if(validaEntrada(captura)){
-    arrayItens.push(captura)
-    console.log(arrayItens)
-    posArray = arrayItens[arrayItens.length-1]
-    escreveLista(captura)
-    document.getElementById('listid').value =""
+function salvar() {
+    captura = document.getElementById('listid').value
+    if (validaEntrada(captura)) {
+        arrayItens.push(captura)
+        console.log(arrayItens)
+        posArray = arrayItens[arrayItens.length - 1]
+        escreveLista()
+        document.getElementById('listid').value = ""
     }
 }
 
 
-function deletar(){
-   /* splice primeiro e elemento depois e a quantidade a ser removido  */
-   arrayItens.splice(posicao,1)
-   alert("deletando "+posicao)
+function deletar(id) {
 
+    /* essa condicao esta pq esta recebendo undefined como primeiro parametro  */
+    if (id !== undefined) {
+        alert("deletando " + id)
+        arrayItens.splice(id, 1)
+        escreveLista()
+    }
     
-}
 
-function editar(){
 
 }
 
-function apagarLista(){
+function editar(id) {
+    if (id !== undefined) {
+        alert("editando " + id)
+    }
+    let areaEditar = document.getElementById('listid')
+    let itemEditar = arrayItens[id];
+    areaEditar.innerText = itemEditar
+   
+}
+
+function apagarLista() {
     let tabelaId = document.getElementById('areaLista');
     decisao = confirm('Deseja realmente limpar a lista de itens ?')
-    if (decisao){
-        arrayItens.splice(0,arrayItens.length)
-        tabelaId.innerHTML =""
+    if (decisao) {
+        arrayItens.splice(0, arrayItens.length)
+        tabelaId.innerHTML = ""
     }
-    
+
 }
 
-function escreveLista(item){
+function escreveLista() {
     let areaLista = document.getElementById('areaLista');
     let botaoEditar = `<td><i class="fas fa-edit btnedit"></i></td>`
     let botaoDeletar = `<td><i class="fas fa-trash-alt btndelete" onclick=deletar()></i></td>`
-        areaLista.innerHTML =""
-        for (let i=0; i < arrayItens.length; i++){
-            let tr = areaLista.insertRow();
+    areaLista.innerHTML = ""
+    for (let i = 0; i < arrayItens.length; i++) {
+        let tr = areaLista.insertRow();
 
-            let td_id = tr.insertCell();
-            td_id.innerText = i
-            let td_foto = tr.insertCell();
-            let td_nome = tr.insertCell();
-            td_nome.innerText = arrayItens[i]
-            let td_editar = tr.insertCell();
-            td_editar.setAttribute("onclick","editar("+i+")")
-            td_editar.innerHTML = botaoEditar
-            let td_deletar = tr.insertCell();
-            
-            td_deletar.innerHTML = botaoDeletar
-            td_deletar.setAttribute("onclick","deletar("+i+")")
-            posicao = i;
-            td_id.classList.add('idLista')
-        }
+        let td_id = tr.insertCell();
+        td_id.classList.add("idLista")
+        td_id.innerText = i
+        let td_foto = tr.insertCell();
+        let td_nome = tr.insertCell();
+        td_nome.innerText = arrayItens[i]
+        let td_editar = tr.insertCell();
+        td_editar.setAttribute("onclick", "editar(" + i + ")")
+        td_editar.innerHTML = botaoEditar
+        let td_deletar = tr.insertCell();
+
+        td_deletar.setAttribute("onclick", "deletar(" + i + ")")
+        td_deletar.innerHTML = botaoDeletar;
+
+        td_id.classList.add('idLista')
+    }
 }
 
-function validaEntrada(entrada){
-    if(entrada == typeof Number || entrada == ""){
-       return alert("Informe um Item \n ( Espaço vazio ou numeros nao são aceitos )")
-    }else return true
+function validaEntrada(entrada) {
+    if (entrada == typeof Number || entrada == "") {
+        return alert("Informe um Item \n ( Espaço vazio ou numeros nao são aceitos )")
+    } else return true
 }
 
 /* Funcao que recebe o item e o insere na listagem de itens  
