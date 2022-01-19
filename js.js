@@ -3,17 +3,23 @@ let arrayItens = [];
 let posArray = 0;
 let retornoApi = "";
 let posicao = 0;
+let itemEditado
+let id = null;
 arrayItens.splice(0, arrayItens.length)
 
 function salvar() {
     captura = document.getElementById('listid').value
-    if (validaEntrada(captura)) {
+    if (validaEntrada(captura) && itemEditado == null) {
         arrayItens.push(captura)
-        console.log(arrayItens)
         posArray = arrayItens[arrayItens.length - 1]
         escreveLista()
         document.getElementById('listid').value = ""
+    }else {
+        arrayItens.splice(id,1,captura)
+        escreveLista()
+        document.getElementById('listid').value = ""
     }
+    itemEditado = null;
 }
 
 
@@ -32,11 +38,12 @@ function deletar(id) {
 
 function editar(id) {
     if (id !== undefined) {
-        alert("editando " + id)
+        itemEditado = 1;
+        let itemEditar = arrayItens[id];
+        document.getElementById("listid").value = itemEditar
+
     }
-    let areaEditar = document.getElementById('listid')
-    let itemEditar = arrayItens[id];
-    areaEditar.innerText = itemEditar
+   
    
 }
 
