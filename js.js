@@ -2,6 +2,7 @@ let captura="";
 let arrayItens = [];
 let posArray = 0;
 let retornoApi = "";
+let posicao = 0;
 
 function salvar(){
     captura = document.getElementById('listid').value 
@@ -16,13 +17,15 @@ function salvar(){
 
 
 function deletar(){
-   
+   /* splice primeiro e elemento depois e a quantidade a ser removido  */
+   arrayItens.splice(posicao,1)
+   alert("deletando "+posicao)
 
     
 }
 
 function editar(){
-    
+
 }
 
 function apagarLista(){
@@ -55,6 +58,7 @@ function escreveLista(item){
             
             td_deletar.innerHTML = botaoDeletar
             td_deletar.setAttribute("onclick","deletar("+i+")")
+            posicao = i;
             td_id.classList.add('idLista')
         }
 }
