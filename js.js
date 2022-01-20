@@ -1,10 +1,18 @@
+let pessoas = [
+    {
+        nome: '',
+        email: ''
+    }
+];
 
- let retornoApi = "";
- let bbb  = "";
-var nomeApi = "";
-var emailApi = "";
+let nomeApi = "";
+let emailApi = "";
+let retornoApi = "";
+let bbb = "";
+
 let arrayItens = [];
 let itemEditado = 0;
+
 let posItemEdit = 0;
 let arrayApi = [""];
 let contadorId = 0;
@@ -13,38 +21,36 @@ let contadorId = 0;
 
 function salvar() {
     let posArray = 0;
-
     captura = document.getElementById('listid').value
-    /*condicao para verificar se esta salvando item editado 
-    ou criando um novo item  */
     if (validaEntrada(captura) && itemEditado == 0) {
         arrayItens.push(captura)
         posArray = arrayItens[arrayItens.length - 1]
         escreveLista()
         document.getElementById('listid').value = ""
-
-       
-    } else {
-
+        itemEditado = 0;
+    } else if (validaEntrada(captura)){
         arrayItens.splice(posItemEdit, 1, captura)
         escreveLista()
         alert("Alteração Feita com Sucesso ! ")
+        itemEditado = 0;
+        limpaCampo()
     }
-    itemEditado = 0;
-}
+        else {
+                alert("Digite um item válido ")
+        }
+    }
+    
 
 
+ /* essa condicao esta pq esta recebendo undefined como primeiro parametro  */
 function deletar(id) {
-
-    /* essa condicao esta pq esta recebendo undefined como primeiro parametro  */
     if (id !== undefined) {
         alert("deletando " + id)
         arrayItens.splice(id, 1)
+        pessoas.splice(id, 1)
         escreveLista()
+        limpaCampo()
     }
-
-
-
 }
 
 /*
@@ -141,51 +147,55 @@ function escreveLista() {
         td_id.innerText = i
         let td_foto = tr.insertCell();
         td_foto.id = (`id${i}`)
-        document.getElementById(`id${i}`).innerText = retornoApi
-      /*  td_foto.innerText = cccc */
-       /* td_foto.innerText = (`${nomeApi} \n ${emailApi}`)*/ 
 
+        /* Aqui e feito a impressao do conteudo da API */
+        td_foto.innerHTML = (`${pessoas[i].nomeApi} <br> E:${pessoas[i].emailAp}`)
+        /*  td_foto.innerText = cccc */
         let td_nome = tr.insertCell();
         td_nome.innerHTML = arrayItens[i]
         let td_editar = tr.insertCell();
         td_editar.setAttribute("onclick", "editar(" + i + ")")
         td_editar.innerHTML = botaoEditar
-        let td_deletar = tr.insertCell();
-
+        let td_deletar = tr.insertCell();     
         td_deletar.setAttribute("onclick", "deletar(" + i + ")")
         td_deletar.innerHTML = botaoDeletar;
-
         td_id.classList.add('idLista')
-        cccc = apiConsumo();
-        
+        apiConsumo()
     }
 }
 
-
+/* A validacao para vazio esta funcionando porem a validacao para numero nao esta */
 function validaEntrada(entrada) {
-    if (typeof entrada === Number || entrada == "") {
-        return alert("Informe um Item \n ( Espaço vazio ou numeros nao são aceitos )")
+    if (entrada == "" ) {
+       
+        
+        return false
+        /* alert("Informe um Item \n ( Espaço vazio ou numeros nao são aceitos )") */
     } else return true
 }
 
 
-function apiConsumo(){
-fetch('https://randomuser.me/api/?results=1')
+function apiConsumo() {
+    fetch('https://randomuser.me/api/?results=1')
         .then((resp) => resp.json())
         .then(function (data) {
             let authors = data.results;
             return authors.map(function (author) {
-                  
-               nomeApi = (author.name.first);
-               retornoApi = nomeApi
-                console.log('teste da api: '+nomeApi)
-               /* emailApi = (author.email)*/
+                let nomeAp = (author.name.first);
+                let emailAp = (author.email)
+                /* console.log('teste da api: ' + nomeApi)*/
+                nomeApi = nomeAp;
+                emailAp = emailAp;
+                pessoas.push({ emailAp, nomeApi });
+                console.log(pessoas)
             })
         })
         .catch(function (error) {
             console.log(error);
         });
-       
+}
 
 
-    }
+function limpaCampo(){
+    document.getElementById("listid").value = ""
+}
