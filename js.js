@@ -1,11 +1,13 @@
 
-
+ let cccc = "";
+ let bbb  = "";
 var nomeApi = "";
 var emailApi = "";
 let arrayItens = [];
 let itemEditado = 0;
 let posItemEdit = 0;
 let arrayApi = [""];
+let contadorId = 0;
 
 
 
@@ -45,6 +47,20 @@ function deletar(id) {
 
 }
 
+/*
+function editar(indice) {
+    if (indice !== undefined) {
+        itemEditado = 1;
+       let itemEditar = arrayItens[indice]
+
+        document.getElementById("listid").innerHTML = itemEditar
+    }
+    return posItemEdit = indice
+
+}
+*/
+
+
 function editar(indice) {
     if (indice !== undefined) {
         itemEditado = 1;
@@ -55,6 +71,8 @@ function editar(indice) {
 
 }
 
+
+/*
 function apagarLista() {
     let tabelaId = document.getElementById('areaLista');
     decisao = confirm('Deseja realmente limpar a lista de itens ?')
@@ -65,33 +83,13 @@ function apagarLista() {
 
 }
 
-function escreveLista() {
-    let areaLista = document.getElementById('areaLista');
-    let botaoEditar = `<td><i class="fas fa-edit btnedit"></i></td>`
-    let botaoDeletar = `<td><i class="fas fa-trash-alt btndelete" onclick=deletar()></i></td>`
-    areaLista.innerHTML = ""
-    for (let i = 0; i < arrayItens.length; i++) {
-        let tr = areaLista.insertRow();
+*/
 
-        let td_id = tr.insertCell();
-        td_id.classList.add("idLista")
-        td_id.innerText = i
-        let td_foto = tr.insertCell();
-        td_foto.id = (`id${i}`)
-        td_foto.innerText = (`${nomeApi} \n ${emailApi}`) 
-
-        let td_nome = tr.insertCell();
-        td_nome.innerHTML = arrayItens[i]
-        let td_editar = tr.insertCell();
-        td_editar.setAttribute("onclick", "editar(" + i + ")")
-        td_editar.innerHTML = botaoEditar
-        let td_deletar = tr.insertCell();
-
-        td_deletar.setAttribute("onclick", "deletar(" + i + ")")
-        td_deletar.innerHTML = botaoDeletar;
-
-        td_id.classList.add('idLista')
-
+/*
+    function escreveLista() {
+        let areaLista = document.getElementById('areaLista');
+        let botaoEditar = `<td><i class="fas fa-edit btnedit"></i></td>`
+        let botaoDeletar = `<td><i class="fas fa-trash-alt btndelete" onclick=deletar()></i></td>`
         fetch('https://randomuser.me/api/?results=1')
         .then((resp) => resp.json())
         .then(function (data) {
@@ -106,9 +104,62 @@ function escreveLista() {
         .catch(function (error) {
             console.log(error);
         });
+  
+            
+            $("#areaLista").append(`<tr>
+                <td class="idLista"> ${contadorId}</td>
+                <td >
+                ${nomeApi}
+                <br>
+                ${emailApi})
+                </td>
+                
+                <td id=id${contadorId}>${captura}</td>
+                <td onclick="editar(${contadorId}">
+                    <i class="fas fa-edit btnedit" aria-hidden="true"> </i>
+                    </td> 
+                    <td onclick="deletar(${contadorId}">
+                    <i class="fas fa-trash-alt btndelete" onclick="deletar()"> </i>
+                    </td>
+                </tr>` );
+                contadorId ++;
+               bbb = document.querySelector('#id3').value 
 
+*/
+
+
+function escreveLista() {
+    let areaLista = document.getElementById('areaLista');
+    let botaoEditar = `<td><i class="fas fa-edit btnedit"></i></td>`
+    let botaoDeletar = `<td><i class="fas fa-trash-alt btndelete" onclick=deletar()></i></td>`
+    areaLista.innerHTML = ""
+    for (let i = 0; i < arrayItens.length; i++) {
+        let tr = areaLista.insertRow();
+
+        let td_id = tr.insertCell();
+        td_id.classList.add("idLista")
+        td_id.innerText = i
+        let td_foto = tr.insertCell();
+        td_foto.id = (`id${i}`)
+        td_foto.innerText = cccc
+       /* td_foto.innerText = (`${nomeApi} \n ${emailApi}`)*/ 
+
+        let td_nome = tr.insertCell();
+        td_nome.innerHTML = arrayItens[i]
+        let td_editar = tr.insertCell();
+        td_editar.setAttribute("onclick", "editar(" + i + ")")
+        td_editar.innerHTML = botaoEditar
+        let td_deletar = tr.insertCell();
+
+        td_deletar.setAttribute("onclick", "deletar(" + i + ")")
+        td_deletar.innerHTML = botaoDeletar;
+
+        td_id.classList.add('idLista')
+        cccc = apiConsumo();
+        
     }
 }
+
 
 function validaEntrada(entrada) {
     if (typeof entrada === Number || entrada == "") {
@@ -117,8 +168,23 @@ function validaEntrada(entrada) {
 }
 
 
+function apiConsumo(){
+fetch('https://randomuser.me/api/?results=1')
+        .then((resp) => resp.json())
+        .then(function (data) {
+            let authors = data.results;
+            return authors.map(function (author) {
+               cccc = "";    
+               nomeApi = (author.name.first);
+               cccc = this.nomeApi
+                console.log('teste da api: '+nomeApi)
+               /* emailApi = (author.email)*/
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+       
 
 
-
-
-
+    }
