@@ -1,19 +1,27 @@
+
+
+var nomeApi = "";
+var emailApi = "";
 let arrayItens = [];
-let itemEditado = 0 ; 
+let itemEditado = 0;
 let posItemEdit = 0;
 let arrayApi = [""];
 
+
+
 function salvar() {
     let posArray = 0;
+
     captura = document.getElementById('listid').value
     /*condicao para verificar se esta salvando item editado 
     ou criando um novo item  */
     if (validaEntrada(captura) && itemEditado == 0) {
         arrayItens.push(captura)
         posArray = arrayItens[arrayItens.length - 1]
-        console.log(arrayApi[arrayApi.length])
         escreveLista()
         document.getElementById('listid').value = ""
+
+       
     } else {
 
         arrayItens.splice(posItemEdit, 1, captura)
@@ -69,8 +77,11 @@ function escreveLista() {
         td_id.classList.add("idLista")
         td_id.innerText = i
         let td_foto = tr.insertCell();
+        td_foto.id = (`id${i}`)
+        td_foto.innerText = (`${nomeApi} \n ${emailApi}`) 
+
         let td_nome = tr.insertCell();
-        td_nome.innerText = arrayItens[i]
+        td_nome.innerHTML = arrayItens[i]
         let td_editar = tr.insertCell();
         td_editar.setAttribute("onclick", "editar(" + i + ")")
         td_editar.innerHTML = botaoEditar
@@ -80,6 +91,22 @@ function escreveLista() {
         td_deletar.innerHTML = botaoDeletar;
 
         td_id.classList.add('idLista')
+
+        fetch('https://randomuser.me/api/?results=1')
+        .then((resp) => resp.json())
+        .then(function (data) {
+            let authors = data.results;
+            return authors.map(function (author) {
+                   
+               nomeApi = (author.name.first);
+
+                emailApi = (author.email)
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
     }
 }
 
@@ -91,20 +118,7 @@ function validaEntrada(entrada) {
 
 
 
-const result = document.querySelector('.result');
-const result2 = document.querySelector('.result2');
 
-fetch('https://randomuser.me/api/', {})
-  .then((response) => {
-   
-    console.log(response);
-    
-    return response.json(); 
-  }).then((data) => {
-  	var email =data.results[0].email;
-   var nome=data.results[0].name.first;
-   result.textContent = email;
-    result2.textContent = nome;
-  }).catch((err) => {
-    console.log('錯誤:', err);
-});
+
+
+

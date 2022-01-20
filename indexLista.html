@@ -34,34 +34,33 @@
         <button class="btn btn-warning" id="btn-deelete-all" onclick="apagarLista()">Apagar Lista</button>
 
     </div>
+    <div id="areaImprimir"class="d-flex justify-content-center">
 
-    <div class="container d-flex">
-        <!--Tabela aonde exibe os items cadastrados  -->
-
-        <table class="table table-hover" id="tabelaId">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Deletar</th>
-                </tr>
-            </thead>
-            <!--Tabela aonde exibe os items cadastrados  -->
-            <tbody id="areaLista">
-
-
-            </tbody>
-        </table>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Cras justo odio
+              <span class="badge badge-primary badge-pill">14</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Dapibus ac facilisis in
+              <span class="fas fa-trash-alt btndelete btndelete" onclick=deletar()>2</span>
+              
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Morbi leo risus
+              <span class="badge badge-primary badge-pill">1</span>
+            </li>
+          </ul>
+       
+         
+          
     </div>
-    <script src="js.js"></script>
+    <script src="js_lista.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-
+  
 </body>
 
 </html>
