@@ -1,5 +1,5 @@
 
- let cccc = "";
+ let retornoApi = "";
  let bbb  = "";
 var nomeApi = "";
 var emailApi = "";
@@ -141,7 +141,8 @@ function escreveLista() {
         td_id.innerText = i
         let td_foto = tr.insertCell();
         td_foto.id = (`id${i}`)
-        td_foto.innerText = cccc
+        document.getElementById(`id${i}`).innerText = retornoApi
+      /*  td_foto.innerText = cccc */
        /* td_foto.innerText = (`${nomeApi} \n ${emailApi}`)*/ 
 
         let td_nome = tr.insertCell();
@@ -174,9 +175,9 @@ fetch('https://randomuser.me/api/?results=1')
         .then(function (data) {
             let authors = data.results;
             return authors.map(function (author) {
-               cccc = "";    
+                  
                nomeApi = (author.name.first);
-               cccc = this.nomeApi
+               retornoApi = nomeApi
                 console.log('teste da api: '+nomeApi)
                /* emailApi = (author.email)*/
             })
