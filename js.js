@@ -40,7 +40,13 @@ function salvar() {
         }
     }
     
-
+function detectaEnter (){
+    $('#listid').keydown(function(e){
+        if (e.which == 13){
+          salvar()
+        }
+       })
+}
 
  /* essa condicao esta pq esta recebendo undefined como primeiro parametro  */
 function deletar(id) {
@@ -76,7 +82,6 @@ function editar(indice) {
     return posItemEdit = indice
 
 }
-
 
 /*
 function apagarLista() {
@@ -132,7 +137,6 @@ function apagarLista() {
                bbb = document.querySelector('#id3').value 
 
 */
-
 
 function escreveLista() {
     let areaLista = document.getElementById('areaLista');
