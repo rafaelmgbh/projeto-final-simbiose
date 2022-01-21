@@ -39,7 +39,7 @@ function salvar() {
                 alert("Digite um item válido ")
         }
     }
-    
+   
 function detectaEnter (){
     $('#listid').keydown(function(e){
         if (e.which == 13){
@@ -47,6 +47,7 @@ function detectaEnter (){
         }
        })
 }
+
 
  /* essa condicao esta pq esta recebendo undefined como primeiro parametro  */
 function deletar(id) {

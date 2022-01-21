@@ -1,15 +1,12 @@
 .d-flex button{
-    margin: 1.5em 0.7em;
-    padding: .3em 2.4em;
+    margin: 2em 1em;
+    padding: .5em 2.4em;
 }
 
-.imgtabela {
- 
-  width: 65px;
-  
-  
+.form-control {
+    width: 40%;
+    
 }
-
 .container table {
     margin: 1em 10em;
 }
